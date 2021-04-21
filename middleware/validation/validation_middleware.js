@@ -1,64 +1,64 @@
 module.exports = {
-    isIdCorrect: (res, req, next) =>{
-        try{
-            const { id } = req.params;
+    isIdCorrect: (req, res, next) => {
+        try {
+            const {id} = req.params;
 
-            if(!id || id < 0 || !Number.isInteger(+id)){
+            if (!id || id < 0 || !Number.isInteger(+id)) {
                 throw new Error('Not valid Id');
             }
 
             next();
-        }catch (e){
+        } catch (e) {
             res.json(e.message);
         }
     },
 
-    isUserUpdateCorrect: (res, req, next) =>{
-        try{
-            const { email, name, password, ...other } = req.body;
+    isUserUpdateCorrect: (req, res, next) => {
+        try {
+            const {email, name, password, ...other} = req.body;
 
-            if(email && email.length < 6){
+            if (email && email.length < 6) {
                 throw new Error('Not valid email');
             }
 
-            if(name && name.length < 3){
+            if (name && name.length < 3) {
                 throw new Error('Not valid name');
             }
 
-            if(password && password.length < 5){
+            if (password && password.length < 5) {
                 throw new Error('Not valid password');
             }
 
-            if (Object.values(other).length){
+            if (Object.values(other).length) {
                 throw new Error('Not allowed fields');
             }
             next();
-        }catch (e){
-             res.json(e.message);
+        } catch (e) {
+            res.json(e.message);
         }
     },
 
-    isUserCreateCorrect:  (res, req, next) =>{
-        try{
-            const { email, name, password, ...other } = req.body;
+    isUserCreateCorrect: (req, res, next) => {
+        try {
+            const {email, name, password, ...other} = req.body;
 
-            if(!email || email.length < 8){
+            if (!email || email.length < 5) {
                 throw new Error('Not valid email');
             }
 
-            if(!name || name.length < 3){
+            if (!name || name.length < 3) {
                 throw new Error('Not valid name');
             }
 
-            if(!password || password.length < 5){
+            if (!password || password.length < 5) {
                 throw new Error('Not valid password');
             }
 
-            if (Object.values(other).length){
+            if (Object.values(other).length) {
                 throw new Error('Not allowed fields');
             }
             next();
-        }catch (e){
+        } catch (e) {
             res.json(e.message);
         }
     }

@@ -7,7 +7,7 @@ module.exports = {
           const {limit = 10, page = 1, ...where} = req.query;
           const offset = limit * (page-1);
 
-          const  users = await userService.selectAllUsers(where, limit, offset);
+          const  users = await userService.selectAllUsers(where, +limit, +offset);
 
           res.json(users);
         } catch (e) {
